@@ -5,6 +5,8 @@ machine:
     override:
     LANG: en_US.UTF-8
 dependencies:
+  pre:
+    - brew install swiftlint
   cache_directories:
     - 'vendor/bundle'
     - '/usr/local/bin/carthage'
