@@ -29,14 +29,12 @@ platform :ios do
 
   desc 'Submit a new Beta to iTunes Connect'
   lane :beta do
-    sigh(skip_install: true, skip_certificate_verification: true)
     gym(scheme: RELEASE_SCHEME, configuration: RELEASE_CONFIGURATION)
     pilot(skip_submission: true)
   end
 
   desc 'Distribute a new version to Crashlytics'
   lane :crashlytics do
-    sigh(adhoc: true, skip_install: true, skip_certificate_verification: true)
     gym(scheme: ADHOC_SCHEME, configuration: ADHOC_CONFIGURATION, use_legacy_build_api: true)
     crashlytics(
       api_token:        CRASHLYTICS_API_KEY,
