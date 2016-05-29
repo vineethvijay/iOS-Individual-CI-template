@@ -18,8 +18,8 @@ CRASHLYTICS_GROUP_ALIAS   = ENV['CRASHLYTICS_GROUP_ALIAS']
 platform :ios do
   desc 'setup libraries'
   lane :setup do
-    cocoapods
-    carthage
+    cocoapods(use_bundle_exec: false)
+    carthage(platform: 'iOS')
   end
 
   desc 'Runs all the tests'
