@@ -15,11 +15,6 @@ namespace :security do
     copy_profiles
   end
 
-  desc 'delete provisioning profiles'
-  task :delete_key do
-    delete_profiles
-  end
-
   def import_p12(file_path, password)
     cmd = "security import #{file_path}"
     cmd += ' -k login.keychain'
@@ -32,12 +27,6 @@ namespace :security do
     cmd = 'cp '
     cmd += SRC_PROFILES_PATH + '* '
     cmd += DST_PROFILES_PATH
-    system cmd
-  end
-
-  def delete_profiles
-    cmd = 'rm -f '
-    cmd += DST_PROFILES_PATH + '*'
     system cmd
   end
 end
