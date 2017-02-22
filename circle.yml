@@ -1,19 +1,15 @@
 machine:
   xcode:
-    version: '7.2'
+    version: '8.2'
   environment:
     override:
     LANG: en_US.UTF-8
 dependencies:
-  pre:
-    - brew install swiftlint
   cache_directories:
     - 'vendor/bundle'
-    - '/usr/local/bin/carthage'
-    - '~/.cocoapods/repos/master/'
   override:
     - bundle install -j4 --path=vendor/bundle
-    - rake security:add_key
+    - bundle exec rake security:add_key
     - bundle exec fastlane setup
 test:
   override:
@@ -22,15 +18,12 @@ deployment:
   iTunesConnect:
     branch: master
     commands:
-      - rake build:prepare
       - bundle exec fastlane beta
-      - rake build:save
-      - rake security:delete_key
+      - bundle exec rake build:save
 
   crashlytics:
     branch: develop
     commands:
-      - rake build:prepare
+      - bundle exec rake build:prepare
       - bundle exec fastlane crashlytics
-      - rake build:save
-      - rake security:delete_key
+      - bundle exec rake build:save
